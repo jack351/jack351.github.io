@@ -132,6 +132,185 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-16T08:38:16.405Z">2019-11-16</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 351 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/11/16/Java%E7%B1%BB%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95/">Java类排序方法</a>
+            
+        </h1>
+        <div class="content">
+            <hr>
+<h2 id="Java中实现类排序的两种方法"><a href="#Java中实现类排序的两种方法" class="headerlink" title="Java中实现类排序的两种方法"></a>Java中实现类排序的两种方法</h2><h4 id="1、内部比较器：这个类实现接口Comparable，重写compareTo-方法，实现比较逻辑"><a href="#1、内部比较器：这个类实现接口Comparable，重写compareTo-方法，实现比较逻辑" class="headerlink" title="1、内部比较器：这个类实现接口Comparable，重写compareTo()方法，实现比较逻辑"></a>1、内部比较器：这个类实现接口Comparable<t>，重写compareTo()方法，实现比较逻辑</t></h4><h5 id="1-写一个类实现Comparable接口"><a href="#1-写一个类实现Comparable接口" class="headerlink" title="(1)写一个类实现Comparable接口"></a>(1)写一个类实现Comparable<t>接口</t></h5><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">Student</span>&gt; </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-keyword">private</span> String name;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-keyword">private</span> String sex;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getSex</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSex</span><span class="hljs-params">(String sex)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getAge</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, String sex, <span class="hljs-keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">super</span>();</span><br><span class="line">		<span class="hljs-keyword">this</span>.name = name;</span><br><span class="line">		<span class="hljs-keyword">this</span>.sex = sex;</span><br><span class="line">		<span class="hljs-keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@Override</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-string">"Student [name="</span> + name + <span class="hljs-string">", sex="</span> + sex + <span class="hljs-string">", age="</span> + age + <span class="hljs-string">"]"</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@Override</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Student o)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.age-o.age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）客户端实现"><a href="#（2）客户端实现" class="headerlink" title="（2）客户端实现"></a>（2）客户端实现</h5><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		List&lt;Student&gt;students=<span class="hljs-keyword">new</span> ArrayList&lt;Student&gt;();</span><br><span class="line">		Student s1=<span class="hljs-keyword">new</span> Student(<span class="hljs-string">"lisi1"</span>, <span class="hljs-string">"nan1"</span>, <span class="hljs-number">18</span>);</span><br><span class="line">		Student s2=<span class="hljs-keyword">new</span> Student(<span class="hljs-string">"lisi2"</span>, <span class="hljs-string">"nan2"</span>, <span class="hljs-number">30</span>);</span><br><span class="line">		Student s3=<span class="hljs-keyword">new</span> Student(<span class="hljs-string">"lisi3"</span>, <span class="hljs-string">"nan3"</span>, <span class="hljs-number">17</span>);</span><br><span class="line">		Student s4=<span class="hljs-keyword">new</span> Student(<span class="hljs-string">"lisi4"</span>, <span class="hljs-string">"nan4"</span>, <span class="hljs-number">22</span>);</span><br><span class="line">		students.add(s1);</span><br><span class="line">		students.add(s2);</span><br><span class="line">		students.add(s3);</span><br><span class="line">		students.add(s4);</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="hljs-string">"未排序前："</span>+students);</span><br><span class="line">		Collections.sort(students);</span><br><span class="line">		System.out.println(<span class="hljs-string">"排序后："</span>+students);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、外部比较器：为这个类定义多个Comparator实现类，重写compare-方法，实现不同的比较逻辑"><a href="#2、外部比较器：为这个类定义多个Comparator实现类，重写compare-方法，实现不同的比较逻辑" class="headerlink" title="2、外部比较器：为这个类定义多个Comparator实现类，重写compare()方法，实现不同的比较逻辑"></a>2、外部比较器：为这个类定义多个Comparator实现类，重写compare()方法，实现不同的比较逻辑</h4><h5 id="（1）实现Compare接口"><a href="#（1）实现Compare接口" class="headerlink" title="（1）实现Compare接口"></a>（1）实现Compare<t>接口</t></h5><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StudentConparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">Student</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@Override</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Student o1, Student o2)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="hljs-keyword">return</span> o1.getAge()-o2.getAge();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-客户端实现"><a href="#2-客户端实现" class="headerlink" title="(2) 客户端实现"></a>(2) 客户端实现</h5><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		List&lt;Student&gt;students=<span class="hljs-keyword">new</span> ArrayList&lt;Student&gt;();</span><br><span class="line">		Student s1=<span class="hljs-keyword">new</span> Student(<span class="hljs-string">"lisi1"</span>, <span class="hljs-string">"nan1"</span>, <span class="hljs-number">18</span>);</span><br><span class="line">		Student s2=<span class="hljs-keyword">new</span> Student(<span class="hljs-string">"lisi2"</span>, <span class="hljs-string">"nan2"</span>, <span class="hljs-number">30</span>);</span><br><span class="line">		Student s3=<span class="hljs-keyword">new</span> Student(<span class="hljs-string">"lisi3"</span>, <span class="hljs-string">"nan3"</span>, <span class="hljs-number">17</span>);</span><br><span class="line">		Student s4=<span class="hljs-keyword">new</span> Student(<span class="hljs-string">"lisi4"</span>, <span class="hljs-string">"nan4"</span>, <span class="hljs-number">22</span>);</span><br><span class="line">		students.add(s1);</span><br><span class="line">		students.add(s2);</span><br><span class="line">		students.add(s3);</span><br><span class="line">		students.add(s4);</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="hljs-string">"未排序前："</span>+students);</span><br><span class="line">		Collections.sort(students,<span class="hljs-keyword">new</span> StudentComparator());</span><br><span class="line">		System.out.println(<span class="hljs-string">"排序后："</span>+students);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-08T03:28:32.209Z">2019-11-08</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 minutes read (About 2307 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/11/08/Java%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/">Java基础笔记</a>
+            
+        </h1>
+        <div class="content">
+            <hr>
+<h2 id="Java笔记整理"><a href="#Java笔记整理" class="headerlink" title="Java笔记整理"></a>Java笔记整理</h2><h4 id="第一章-Java程序开发"><a href="#第一章-Java程序开发" class="headerlink" title="第一章 Java程序开发"></a>第一章 Java程序开发</h4><h5 id="1、常用的字符集"><a href="#1、常用的字符集" class="headerlink" title="1、常用的字符集"></a>1、常用的字符集</h5><p>​     ASCII （单字节）</p>
+<p>​    ISO8859-1（单字节，ASCII的扩展）</p>
+<p>   GB2312，GBK，Big5（双字节）</p>
+<p>   Unicode</p>
+<p>​        UTF-8（1-4字节，可变字节编码，兼容ASCII，中文占三个字节）</p>
+<p>​        UTF-16（2字节）</p>
+<p>​        UTF-32（4字节）</p>
+<p>Java语言使用Unicode字符集；Java中的字符串都用Unicode字符集编码；Java中的char类型占2个字节。 </p>
+<h5 id="2、Java的跨平台性"><a href="#2、Java的跨平台性" class="headerlink" title="2、Java的跨平台性"></a>2、Java的跨平台性</h5><p>​        跨平台性: 一处编写，处处运行。指的是用Java语言编写的程序，可以在各个操作系统上运行，不需要修改。</p>
+<p>​        跨平台性的实现原理: Java源程序是解释执行的，每个平台上有不同版本的JVM，JVM负责把字节码文件（类文件）解释成符合当前平台规范的机器码</p>
+<h5 id="3、专业术语"><a href="#3、专业术语" class="headerlink" title="3、专业术语"></a>3、专业术语</h5><p>​       JVM：Java Virtual Machine，Java虚拟机</p>
+<p>​      JDK：Java Development Kit，Java开发工具包</p>
+<p>​     JRE：Java Runtime Environment，Java运行环境</p>
+<h4 id="第二章-数据类型与运算符"><a href="#第二章-数据类型与运算符" class="headerlink" title="第二章 数据类型与运算符"></a>第二章 数据类型与运算符</h4><h5 id="1、数据类型"><a href="#1、数据类型" class="headerlink" title="1、数据类型"></a>1、数据类型</h5><p>​      基本数据类型和引用类型</p>
+<h5 id="2、基本数据类型"><a href="#2、基本数据类型" class="headerlink" title="2、基本数据类型"></a>2、基本数据类型</h5><p>​      数据类型  字节数    默认值      包装类</p>
+<p>​         byte     1字节      0           Byte</p>
+<p>​       short     2字节      0           Short</p>
+<p>​        int        4字节      0           Integer</p>
+<p>​       long     8字节      0           Long</p>
+<p>​      float     4字节     0.0f          Float</p>
+<p>​    double   8字节     0.0           Double</p>
+<p>​    char     2字节     ‘’\u0000       Charatcter</p>
+<p>  boolean  true/false   false          Boolean</p>
+<h5 id="3、-基本数据类型的显式和隐式转换"><a href="#3、-基本数据类型的显式和隐式转换" class="headerlink" title="3、 基本数据类型的显式和隐式转换"></a>3、 基本数据类型的显式和隐式转换</h5><p>​    隐式转换（自动类型转换）: 范围小的可以直接转换为转换范围大的类型</p>
+<p>   显式转换（强制类型转换）: 范围大的不可以直接转换为转换范围小的类型,需要强制转换</p>
+<h5 id="4、Java内存的分布"><a href="#4、Java内存的分布" class="headerlink" title="4、Java内存的分布"></a>4、Java内存的分布</h5><p>   堆、栈、常量池、方法区</p>
+<h5 id="5、基本数据类型和引用类型在内存存储上有什么区别"><a href="#5、基本数据类型和引用类型在内存存储上有什么区别" class="headerlink" title="5、基本数据类型和引用类型在内存存储上有什么区别"></a>5、基本数据类型和引用类型在内存存储上有什么区别</h5><p>   基本数据类型存在栈内存，引用类型的引用存在栈内存，内容存在堆内存；</p>
+<p>   基本数据类型用=直接赋值，引用类型使用new创建对象赋值。</p>
+<h5 id="6、自动装箱拆箱"><a href="#6、自动装箱拆箱" class="headerlink" title="6、自动装箱拆箱"></a>6、自动装箱拆箱</h5><p> 装箱：基本数据类型转换为包装器类型，称为装箱（boxing）；例如，int型转换为Integer类型；</p>
+<p> 拆箱：包装器类型转换为基本数据类型，称为拆箱（unboxing）；例如Integer类型转换为int类型；</p>
+<p> 在自动装箱拆箱过程中，针对的是Byte,Short,Intger,Long,Character 只有数值是byte范围内的时候，才使  用到常量池，否则都是分配新的内存空间。</p>
+<h5 id="7、Java语言中的运算符"><a href="#7、Java语言中的运算符" class="headerlink" title="7、Java语言中的运算符"></a>7、Java语言中的运算符</h5><p>  &amp;和&amp;&amp;，|和||作为逻辑运算符的区别？</p>
+<p>  &amp;和|称为非短路逻辑运算；&amp;&amp;和||称为短路逻辑运算。</p>
+<h4 id="第五章、面向对象"><a href="#第五章、面向对象" class="headerlink" title="第五章、面向对象"></a>第五章、面向对象</h4><h5 id="1、面向对象的三特征"><a href="#1、面向对象的三特征" class="headerlink" title="1、面向对象的三特征"></a>1、面向对象的三特征</h5><p>面向对象的三个基本特征是：封装、继承、多态</p>
+<p><strong>封装</strong>：封装是将对象的信息隐藏在对象内部，禁止外部程序直接访问对象内部的属性，对外提供一个接口访问对象的属性。</p>
+<p>通俗解释：Java的封装就是将属性私有化（private），对外提供一个公有（public）的getter和setter方法供外部来获得或者修改当前属性的值。</p>
+<p><strong>继承</strong>：通俗解释：子类继承父类，子类就拥有了父类的非私有（private）的属性和方法，同时子类可以扩展自己的属性和方法。</p>
+<p><strong>多态</strong>：不同类的对象对同一消息做出响应，即同一消息可以根据发送对象的不同而采用多种不同的行为方式。</p>
+<p>成员访问控制符：</p>
+<p>private：只能在同一类中进行访问</p>
+<p>default:同一包中的所有类都可以访问</p>
+<p>protected:不同包中的子类才能访问</p>
+<p>public：不同包非子类都可以访问</p>
+<h5 id="2、其他"><a href="#2、其他" class="headerlink" title="2、其他"></a>2、其他</h5><p>extends关键字：所有Java中的类都直接或间接继承自Object</p>
+<p>super关键字：可以在子类构造方法中显式调用父类的构造方法，该调用必须位于子类构造方</p>
+<p>方法覆盖（override）：方法名相同参数列表也相同，主要是用于子类对父类的方法重写</p>
+<p>方法重载(overload) : 方法名相同，但参数列表不同，主要用于在同一个类中</p>
+<h5 id="3、super和this有什么区别？"><a href="#3、super和this有什么区别？" class="headerlink" title="3、super和this有什么区别？"></a>3、super和this有什么区别？</h5><p>​    this引用对象自身、调用自己的成员变量、方法或构造方法，而super调用父类定义的成员变量、方法或构造方法，super不能当作引用传递给其他的调用者而this可以。</p>
+<h5 id="4、final关键字修饰变量、成员方法和类的区别？"><a href="#4、final关键字修饰变量、成员方法和类的区别？" class="headerlink" title="4、final关键字修饰变量、成员方法和类的区别？"></a>4、final关键字修饰变量、成员方法和类的区别？</h5><p>1、final修饰变量时，该变量成为常量，不能重新进行赋值</p>
+<p>2、final修饰方法时，说明该方法不能被子类覆盖</p>
+<p>3、final修饰类时，说明该类无法被继承</p>
+<h5 id="5、接口与抽象类的区别"><a href="#5、接口与抽象类的区别" class="headerlink" title="5、接口与抽象类的区别"></a>5、接口与抽象类的区别</h5><p>抽象类：</p>
+<p> 1、有构造方法</p>
+<p>2、可以有抽象方法也可以没有</p>
+<p>3、单一继承</p>
+<p>接口：</p>
+<p>1、没构造方法</p>
+<p>2、定义的方法都是抽象方法、定义的变量都是最终常量</p>
+<p>3、可以多继承</p>
+<h4 id="第六章-垃圾回收"><a href="#第六章-垃圾回收" class="headerlink" title="第六章 垃圾回收"></a>第六章 垃圾回收</h4><h5 id="Java垃圾回收机制："><a href="#Java垃圾回收机制：" class="headerlink" title="Java垃圾回收机制："></a>Java垃圾回收机制：</h5><p>​      Java垃圾回收是一个自动运行的管理程序，运行时使用的内存的进程。通过GC的自动执行JVM将程序员从申请和释放内存的繁重操作中解放出来，垃圾回收机制的托管特性可以一定程度上保证程序的健壮性。</p>
+<h5 id="final-finally-finalize的区别是什么？"><a href="#final-finally-finalize的区别是什么？" class="headerlink" title="final\finally\finalize的区别是什么？"></a>final\finally\finalize的区别是什么？</h5><p>1、首先回答final关键字修饰变量、成员方法和类的区别；</p>
+<p>2、finally是异常处理中必须执行的代码块；</p>
+<p>3、finalize是Object提供的当对象被垃圾回收器回收时执行的方法。</p>
+<h4 id="第七章-异常处理"><a href="#第七章-异常处理" class="headerlink" title="第七章 异常处理"></a>第七章 异常处理</h4><h5 id="标准异常的顶级父类是Throwable，Throwable类有两个子类：Exception和Error。"><a href="#标准异常的顶级父类是Throwable，Throwable类有两个子类：Exception和Error。" class="headerlink" title="标准异常的顶级父类是Throwable，Throwable类有两个子类：Exception和Error。"></a>标准异常的顶级父类是Throwable，Throwable类有两个子类：Exception和Error。</h5><h5 id="Exception与Error的区别？"><a href="#Exception与Error的区别？" class="headerlink" title="Exception与Error的区别？"></a>Exception与Error的区别？</h5><p>错误（Error）:错误程序没法处理，例如内存泄漏。发生错误后，一般虚拟机会选择终止程序运行；</p>
+<p>异常（Exception）：异常指的是程序运行时发生的不正常事件；异常能够被程序处理，保证程序继续运行下去。</p>
+<h5 id="运行时异常和非运行时异常的区别？"><a href="#运行时异常和非运行时异常的区别？" class="headerlink" title="运行时异常和非运行时异常的区别？"></a>运行时异常和非运行时异常的区别？</h5><p>运行时异常：RuntimeException（非检测异常：unchecked Exception）：</p>
+<p>在编译期不检测，程序中可以选择处理，也可以不处理，如果不处理运行时出现异常时会中断程序。</p>
+<p>非运行时异常：（检测异常：checked Exception）：</p>
+<p>必须进行处理的异常，如果不处理，将发生编译期错误。</p>
+<h5 id="处理异常有哪几种？"><a href="#处理异常有哪几种？" class="headerlink" title="处理异常有哪几种？"></a>处理异常有哪几种？</h5><p>1、通过try…catch…来进行捕获</p>
+<p>2、通过throws往上继续抛，将当前的异常类型声明到当前的方法上面。 </p>
+<p>throw和throws的区别？</p>
+<p>throw是手动抛出一个异常对象；</p>
+<p>throws放在方法声明上面，指定调用这个方法时，必须处理此异常。</p>
+<h5 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h5><p>自己定义的异常类继承Exception及相关子类</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>Java对异常进行了分类，不同类型的异常分别用不同的Java类表示，所有异常的根类为java.lang.Throwable，Throwable下面又派生了两个子类：Error和Exception。</p>
+<p>Exception又分为checked异常和unchecked异常，checked异常是编译器强制必须try..catch处理或用throws声明继续抛给上层调用方法处理，unchecked异常可以处理也可以不处理。</p>
+<h4 id="第八章-多线程"><a href="#第八章-多线程" class="headerlink" title="第八章 多线程"></a>第八章 多线程</h4><h5 id="进程与线程的关系"><a href="#进程与线程的关系" class="headerlink" title="进程与线程的关系"></a>进程与线程的关系</h5><p>进程是系统运行程序的基本单位，程序运行时就会产生一个进程，一个程序可以有多个进程；</p>
+<p>线程是进程中执行运算的最小单位，线程可以共享进程的数据。</p>
+<h5 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h5><p>1、新建状态：线程创建完成，处于新建状态</p>
+<p>2、就绪状态：调用start()方法后，线程处于就绪状态，也就是说，线程正在等待获取cpu资源的机会，一旦别的线程运行完成后，退出cpu资源后，则此线程有机会进入cpu</p>
+<p>3、运行状态：指线程获得了cpu资源</p>
+<p>4、死亡状态：指线程工作已经完成</p>
+<h5 id="创建线程的几种方法"><a href="#创建线程的几种方法" class="headerlink" title="创建线程的几种方法"></a>创建线程的几种方法</h5><p>1、继承Thread类</p>
+<p>2、实现Runnable接口 </p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-06T13:35:42.981Z">2019-11-06</time>
                 
                 
@@ -307,7 +486,7 @@ properties里面：<figure class="highlight plain hljs"><table><tr><td class="gu
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        4
                     </p>
                 </div>
             </div>
@@ -447,6 +626,44 @@ properties里面：<figure class="highlight plain hljs"><table><tr><td class="gu
         
         <article class="media">
             
+            <a href="/2019/11/16/Java%E7%B1%BB%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Java类排序方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-16T08:38:16.405Z">2019-11-16</time></div>
+                    <a href="/2019/11/16/Java%E7%B1%BB%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java类排序方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/08/Java%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Java基础笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-08T03:28:32.209Z">2019-11-08</time></div>
+                    <a href="/2019/11/08/Java%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java基础笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/06/Idea%E4%B8%AD%E8%BF%9B%E8%A1%8CSpringBoot%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Idea中进行SpringBoot的分布式开发配置">
@@ -500,7 +717,7 @@ properties里面：<figure class="highlight plain hljs"><table><tr><td class="gu
                     <span class="level-item">November 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -553,6 +770,44 @@ properties里面：<figure class="highlight plain hljs"><table><tr><td class="gu
         
         <article class="media">
             
+            <a href="/2019/11/16/Java%E7%B1%BB%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Java类排序方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-16T08:38:16.405Z">2019-11-16</time></div>
+                    <a href="/2019/11/16/Java%E7%B1%BB%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java类排序方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/11/08/Java%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Java基础笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-08T03:28:32.209Z">2019-11-08</time></div>
+                    <a href="/2019/11/08/Java%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java基础笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/06/Idea%E4%B8%AD%E8%BF%9B%E8%A1%8CSpringBoot%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Idea中进行SpringBoot的分布式开发配置">
@@ -606,7 +861,7 @@ properties里面：<figure class="highlight plain hljs"><table><tr><td class="gu
                     <span class="level-item">November 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
